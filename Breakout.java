@@ -84,7 +84,12 @@ public class Breakout extends GraphicsProgram {
 			}
 			removeGameMessage();
 			setTheBall();
+			while ((ball.getY() < HEIGHT) && (numOfBricks > 0)){
+				moveBall();
+				
+			}
 		}
+		displayMessage("Game Over");
 	}
 
 	/**
@@ -92,7 +97,7 @@ public class Breakout extends GraphicsProgram {
 	 * 
 	 * @param message
 	 */
-	private void displayMassage(String message) {
+	private void displayMessage(String message) {
 		label = new GLabel(message);
 		label.setFont("Verdana-28");
 		double X = (getWidth() - label.getWidth()) / 2;
