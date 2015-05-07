@@ -89,11 +89,14 @@ public class Breakout extends GraphicsProgram {
 			removeGameMessage();
 			setTheBall();
 			while ((ball.getY() < HEIGHT) && (numOfBricks > 0)){
-				moveBall();
+				moveTheBall();
 				
 			}
 		}
 		displayMessage("Game Over");
+	}
+	private void setTheBall() {
+		
 	}
 
 	/**
