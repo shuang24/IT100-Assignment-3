@@ -81,7 +81,7 @@ public class Breakout extends GraphicsProgram {
 		/* You fill this in, along with any subsidiary methods */
 
 		for (int i = 0; i < NTURNS; i++) {
-			displayMessage("Left Click Mouse");
+			displayMessage("Click to start");
 			startGame = false;
 			while (!startGame) {
 				pause(DELAY * 5);
