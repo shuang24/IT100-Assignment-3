@@ -95,13 +95,25 @@ public class Breakout extends GraphicsProgram {
 		}
 		displayMessage("Game Over");
 	}
+	
+	/**
+	 * Set The Ball
+	 */
+	
 	private void setTheBall() {
 		double b = 2 * BALL_RADIUS;
 		ball = new GOval(b, b);
 		ball.setLocation(WIDTH / 2 - BALL_RADIUS, HEIGHT / 2 - BALL_RADIUS);
 		add(ball);
 	}
-
+	/**
+	 * Move The Ball
+	 */
+	
+	private void moveTheBall() {
+		ball.move(vX, vY)
+	}
+	
 	/**
 	 * Message for game
 	 * 
