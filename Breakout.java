@@ -83,6 +83,7 @@ public class Breakout extends GraphicsProgram {
 				pause(DELAY * 5);
 			}
 			removeGameMessage();
+			setTheBall();
 		}
 	}
 
