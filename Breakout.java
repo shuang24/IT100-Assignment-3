@@ -132,7 +132,7 @@ public class Breakout extends GraphicsProgram {
 	 * delete message
 	 */
 
-	private void removeGameMessage() {
-		remove(label);
-	}
+//	private void removeGameMessage() {
+//		remove(label);
+//	}
 }
