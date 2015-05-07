@@ -96,7 +96,10 @@ public class Breakout extends GraphicsProgram {
 		displayMessage("Game Over");
 	}
 	private void setTheBall() {
-		
+		double b = 2 * BALL_RADIUS;
+		ball = new GOval(b, b);
+		ball.setLocation(Witdh / 2 - BALL_RADIUS, HEIGHT / 2 - BALL_RADIUS);
+		add(ball);
 	}
 
 	/**
