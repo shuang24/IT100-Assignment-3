@@ -114,6 +114,7 @@ public class Breakout extends GraphicsProgram {
 	public void mouseClicked(MouseEvent e){
 		startGame = true;
 	}
+	
 	/**
 	 * Move The Ball
 	 */
