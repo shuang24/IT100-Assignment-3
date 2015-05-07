@@ -64,15 +64,15 @@ public class Breakout extends GraphicsProgram {
 	/**
 	 * Instance variables
 	 */
-	private GRect paddle;
+//	private GRect paddle;
 	private GOval ball;
 	private double vX, vY;
 	private RandomGenerator rgen = RandomGenerator.getInstance();
 	private int numOfBricks;
 	private GLabel label;
-	private int numOfHits;
+//	private int numOfHits;
 	private GLabel scoreLabel;
-	private int score;
+//	private int score;
 	private boolean startGame;
 
 	/* Method: run() */
