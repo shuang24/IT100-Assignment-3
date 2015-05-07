@@ -70,6 +70,7 @@ public class Breakout extends GraphicsProgram {
 	private int numOfHits;
 	private GLabel scoreLabel;
 	private int score;
+	private boolean startGame;
 
 	/* Method: run() */
 	/** Runs the Breakout program. */
