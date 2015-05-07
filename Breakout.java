@@ -78,7 +78,11 @@ public class Breakout extends GraphicsProgram {
 
 		for (int i = 0; i < NTURNS; i++) {
 			displayMessage("Left Click Mouse");
-
+			startGame = false;
+			while (!startGame) {
+				pause(DELAY * 5);
+			}
+			removeGameMessage();
 		}
 	}
 
@@ -100,7 +104,7 @@ public class Breakout extends GraphicsProgram {
 	 * delete message
 	 */
 
-//	private void remove() {
-//		remove(label);
-//	}
+	private void removeGameMessage() {
+		remove(label);
+	}
 }
