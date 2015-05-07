@@ -86,7 +86,7 @@ public class Breakout extends GraphicsProgram {
 			while (!startGame) {
 				pause(DELAY * 5);
 			}
-			removeGameMessage();
+//			removeGameMessage();
 			setTheBall();
 			while ((ball.getY() < HEIGHT) && (numOfBricks > 0)){
 				moveTheBall();
@@ -142,7 +142,7 @@ public class Breakout extends GraphicsProgram {
 	 * delete message
 	 */
 
-	private void removeGameMessage() {
-		remove(label);
-	}
+//	private void removeGameMessage() {
+//		remove(label);
+//	}
 }
