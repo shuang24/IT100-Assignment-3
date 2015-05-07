@@ -89,7 +89,7 @@ public class Breakout extends GraphicsProgram {
 	 */
 	private void displayMassage(string message) {
 		label = new GLabel(message);
-		label.setFont("SansSerif-28");
+		label.setFont("Verdana-28");
 		double X = (getWidth() - label.getWidth()) / 2;
 		double Y = (getHeight() - label.getHeight()) / 2;
 		label.setLocation(X, Y);
