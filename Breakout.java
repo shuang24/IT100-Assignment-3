@@ -56,11 +56,45 @@ public class Breakout extends GraphicsProgram {
 
 /** Number of turns */
 	private static final int NTURNS = 3;
+	
+/**
+ * Instance variables	
+ */
+	private GRect paddle;
+	private GOval ball;
+	private double vX, vY;
+	private RandomGenerator rgen = RandomGenerator.getInstance();
+	private int numOfBricks;
+	private GLabel label;
+	private int numOfHits;
+	private GLabel scoreLabel;
+	private int score;
+	
+	
+	
 
 /* Method: run() */
 /** Runs the Breakout program. */
 	public void run() {
 		/* You fill this in, along with any subsidiary methods */
+		
+		for (int i = 0; i< NTURNS; i++) {
+			displayMessage("Left Click Mouse");
+			
+		}
+	}
+	
+	/**
+	 * Message for game
+	 * @param message
+	 */
+	private void displayMassage(string message) {
+		label = new GLabel(message);
+		label.setFont("SansSerif-28");
+		double X = (getWidth() - label.getWidth()) / 2;
+		double Y = (getHeight() - label.getHeight()) / 2;
+		label.setLocation(X, Y);
+		add(label);
 	}
 
 }
