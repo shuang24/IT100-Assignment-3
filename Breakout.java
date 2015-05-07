@@ -120,6 +120,7 @@ public class Breakout extends GraphicsProgram {
 	 * 
 	 * @param message
 	 */
+	
 	private void displayMessage(String message) {
 		label = new GLabel(message);
 		label.setFont("Verdana-28");
