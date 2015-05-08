@@ -74,6 +74,12 @@ public class Breakout extends GraphicsProgram {
 	private GLabel scoreLabel;
 	// private int score;
 	private boolean startGame;
+	
+	/* Method: init() */
+	
+	public void init() {
+		
+	}
 
 	/* Method: run() */
 	/** Runs the Breakout program. */
