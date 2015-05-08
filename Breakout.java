@@ -141,7 +141,7 @@ public class Breakout extends GraphicsProgram {
 		paddle.setLocation(WIDTH - PADDLE_WIDTH /2 , HEIGHT - PADDLE_Y_OFFSET - PADDLE_HEIGHT);
 		paddle.setFilled(true);
 		add(paddle);
-		
+		addMouseListeners();
 	}
 	/**
 	 * Set The Ball
