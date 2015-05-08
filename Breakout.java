@@ -61,6 +61,7 @@ public class Breakout extends GraphicsProgram {
 	/** Animation delay or pause time between ball moves */
 	private static final int DELAY = 15;
 	
+	/** Number of times the paddle has to hit beore doubling speed */
 	private static final int SUCCESSFULL_PADDLEHITS_BEFORE_KICKER = 7;
 
 	/**
