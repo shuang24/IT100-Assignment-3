@@ -82,7 +82,6 @@ public class Breakout extends GraphicsProgram {
 		setTheBricks();
 		setThePaddle();
 		setScore();
-		
 	}
 
 	/* Method: run() */
@@ -92,7 +91,10 @@ public class Breakout extends GraphicsProgram {
 
 		for (int i = 0; i < NTURNS; i++) {
 			displayMessage("Click to start");
-			waitForClick();
+			GameStart = false;
+			while (!GameStart) {
+				pause(DELAY * 5);
+			}
 			removeGameMessage();
 			setTheBall();
 			while ((ball.getY() < HEIGHT) && (numOfBricks > 0)) {
@@ -150,8 +152,6 @@ public class Breakout extends GraphicsProgram {
 		double b = 2 * BALL_RADIUS;
 		ball = new GOval(b, b);
 		ball.setLocation(WIDTH / 2 - BALL_RADIUS, HEIGHT / 2 - BALL_RADIUS);
-		vX = 1;
-		vY = 1;
 		add(ball);
 	}
 	
