@@ -150,6 +150,8 @@ public class Breakout extends GraphicsProgram {
 		double b = 2 * BALL_RADIUS;
 		ball = new GOval(b, b);
 		ball.setLocation(WIDTH / 2 - BALL_RADIUS, HEIGHT / 2 - BALL_RADIUS);
+		vX = 1;
+		vY = 1;
 		add(ball);
 	}
 	
