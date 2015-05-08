@@ -60,6 +60,8 @@ public class Breakout extends GraphicsProgram {
 
 	/** Animation delay or pause time between ball moves */
 	private static final int DELAY = 15;
+	
+	private static final int SUCCESSFULL_PADDLEHITS_BEFORE_KICKER = 7;
 
 	/**
 	 * Instance variables
@@ -225,6 +227,20 @@ public class Breakout extends GraphicsProgram {
 		if(x < 0) {
 			vX = -vX;
 			ball.move(-2 * x, 0);
+		}
+		
+		GObject collider = getCollidingObject();
+		if (collider == paddle) {
+			double hitPosition = (2 * (x - paddle.getX()) + b - PADDLE_WIDTH) / (b + PADDLE_WIDTH);
+			if (hitPosition < 0) {
+				vX = -Math.abs(vX);
+			}else {
+				vX = Math.abs(vX);
+			}
+			numberOfPaddleHits++;
+			if (numberOfPaddleHits % SUCCESSFULL_PADDLEHITS_BEFORE_KICKER == 0) {
+				
+			}
 		}
 	}
 	
