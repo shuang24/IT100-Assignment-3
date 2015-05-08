@@ -116,9 +116,9 @@ public class Breakout extends GraphicsProgram {
 		int firstX = (WIDTH - BRICK_WIDTH * NBRICKS_PER_ROW - BRICK_SEP * (NBRICKS_PER_ROW - 1)) / 2;
 		Color[] colors = {Color.RED, Color.ORANGE, Color.YELLOW, Color.GREEN, Color.CYAN};
 
-		for (int j = 0; j < NBRICK_ROWS; j ++) {
+		for (int k = 0; k < NBRICK_ROWS; k ++) {
 			int X = firstX;
-			Color c = colors[j / 2];
+			Color c = colors[k / 2];
 			for (int i = 0; i < NBRICKS_PER_ROW; i++) {
 				GRect brick = new GRect(BRICK_WIDTH, BRICK_HEIGHT);
 				brick.setLocation(X, Y);
