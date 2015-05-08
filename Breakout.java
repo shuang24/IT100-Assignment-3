@@ -57,22 +57,22 @@ public class Breakout extends GraphicsProgram {
 
 	/** Number of turns */
 	private static final int NTURNS = 3;
-	
+
 	/** Animation delay or pause time between ball moves */
 	private static final int DELAY = 15;
-	
+
 	/**
 	 * Instance variables
 	 */
-//	private GRect paddle;
+	// private GRect paddle;
 	private GOval ball;
 	private double vX, vY;
-//	private RandomGenerator rgen = RandomGenerator.getInstance();
+	// private RandomGenerator rgen = RandomGenerator.getInstance();
 	private int numOfBricks;
 	private GLabel label;
-//	private int numOfHits;
+	// private int numOfHits;
 	private GLabel scoreLabel;
-//	private int score;
+	// private int score;
 	private boolean startGame;
 
 	/* Method: run() */
@@ -86,49 +86,73 @@ public class Breakout extends GraphicsProgram {
 			while (!startGame) {
 				pause(DELAY * 5);
 			}
-//			removeGameMessage();
+			// removeGameMessage();
 			setTheBall();
-			while ((ball.getY() < HEIGHT) && (numOfBricks > 0)){
+			while ((ball.getY() < HEIGHT) && (numOfBricks > 0)) {
 				moveTheBall();
-				
 			}
 		}
 		displayMessage("Game Over");
 	}
 	
 	/**
+	 * Set the Bricks
+	 */
+	private void setTheBricks() {
+		int Y = BRICK_Y_OFFSET;
+		int firstX = (WIDTH - BRICK_WIDTH * NBRICKS_PER_ROW - BRICK_SEP * (NBRICKS_PER_ROW - 1)) / 2;
+		Color[] colors = {Color.RED, Color.ORANGE, Color.YELLOW, Color.GREEN, Color.CYAN};
+
+		for (int j = 0; j < NBRICK_ROWS; j ++) {
+			int X = firstX;
+			Color c = colors[j / 2];
+			for (int i = 0; i < NBRICKS_PER_ROW; i++) {
+				GRect brick = new GRect(BRICK_WIDTH, BRICK_HEIGHT);
+				brick.setLocation(X, Y);
+				brick.setFilled(true);
+				brick.setColor(c);
+				add(brick);
+				X += BRICK_WIDTH + BRICK_SEP;
+			}
+			Y += BRICK_HEIGHT + BRICK_SEP;
+		}
+		numOfBricks = NBRICK_ROWS * NBRICKS_PER_ROW;
+	}
+	}
+	
+	/**
 	 * Set The Ball
 	 */
-	
+
 	private void setTheBall() {
 		double b = 2 * BALL_RADIUS;
 		ball = new GOval(b, b);
 		ball.setLocation(WIDTH / 2 - BALL_RADIUS, HEIGHT / 2 - BALL_RADIUS);
 		add(ball);
 	}
-	
+
 	/**
 	 * Start The Game!
 	 */
-	
-	public void mouseClicked(MouseEvent e){
+
+	public void mouseClicked(MouseEvent e) {
 		startGame = true;
 	}
-	
+
 	/**
 	 * Move The Ball
 	 */
-	
+
 	private void moveTheBall() {
 		ball.move(vX, vY);
 	}
-	
+
 	/**
 	 * Message for game
 	 * 
 	 * @param message
 	 */
-	
+
 	private void displayMessage(String message) {
 		label = new GLabel(message);
 		label.setFont("Verdana-30");
@@ -142,7 +166,7 @@ public class Breakout extends GraphicsProgram {
 	 * delete message
 	 */
 
-//	private void removeGameMessage() {
-//		remove(label);
-//	}
+	// private void removeGameMessage() {
+	// remove(label);
+	// }
 }
