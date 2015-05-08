@@ -92,7 +92,7 @@ public class Breakout extends GraphicsProgram {
 				moveTheBall();
 			}
 			if (numOfBricks == 0) {
-				displayMessage('You Win!');
+				displayMessage("You Win!");
 				return;
 			}
 		}
