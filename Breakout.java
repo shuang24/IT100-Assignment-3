@@ -91,6 +91,10 @@ public class Breakout extends GraphicsProgram {
 			while ((ball.getY() < HEIGHT) && (numOfBricks > 0)) {
 				moveTheBall();
 			}
+			if (numOfBricks == 0) {
+				displayMessage('You Win!');
+				return;
+			}
 		}
 		displayMessage("Game Over");
 	}
