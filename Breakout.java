@@ -157,6 +157,12 @@ public class Breakout extends GraphicsProgram {
 		ball = new GOval(b, b);
 		ball.setLocation(WIDTH / 2 - BALL_RADIUS, HEIGHT / 2 - BALL_RADIUS);
 		add(ball);
+		
+		vY = VY_START;
+		vX = rgen.nextDouble(1.0, 3.0);
+		if (rgen.nextBoolean(0.5)) vX = -vX;
+		
+		numOfHits = 0;
 	}
 	
 	/**
