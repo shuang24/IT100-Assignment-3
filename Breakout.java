@@ -96,7 +96,7 @@ public class Breakout extends GraphicsProgram {
 			while (!GameStart) {
 				pause(DELAY * 5);
 			}
-			// removeGameMessage();
+			removeGameMessage();
 			setTheBall();
 			while ((ball.getY() < HEIGHT) && (numOfBricks > 0)) {
 				moveTheBall();
