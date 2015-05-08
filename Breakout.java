@@ -139,6 +139,7 @@ public class Breakout extends GraphicsProgram {
 	private void setThePaddle(){
 		paddle = new GRect(PADDLE_WIDTH, PADDLE_HEIGHT);
 		
+		
 	}
 	/**
 	 * Set The Ball
