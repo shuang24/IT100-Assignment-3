@@ -82,7 +82,7 @@ public class Breakout extends GraphicsProgram {
 		setTheBricks();
 		setThePaddle();
 		setScore();
-		setTheBall();
+		
 	}
 
 	/* Method: run() */
