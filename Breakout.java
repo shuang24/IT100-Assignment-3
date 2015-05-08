@@ -64,7 +64,7 @@ public class Breakout extends GraphicsProgram {
 	/**
 	 * Instance variables
 	 */
-	// private GRect paddle;
+	private GRect paddle;
 	private GOval ball;
 	private double vX, vY;
 	// private RandomGenerator rgen = RandomGenerator.getInstance();
@@ -137,6 +137,7 @@ public class Breakout extends GraphicsProgram {
 	 */
 	
 	private void setThePaddle(){
+		paddle = new GRect(PADDLE_WIDTH, PADDLE_HEIGHT);
 		
 	}
 	/**
