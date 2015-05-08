@@ -99,6 +99,7 @@ public class Breakout extends GraphicsProgram {
 			setTheBall();
 			while ((ball.getY() < HEIGHT) && (numOfBricks > 0)) {
 				moveTheBall();
+				checkForCollision();
 			}
 			if (numOfBricks == 0) {
 				displayMessage("You Win!");
@@ -204,7 +205,25 @@ public class Breakout extends GraphicsProgram {
 	private void moveTheBall() {
 		ball.move(vX, vY);
 	}
+	
+	/**
+	 * Collision and direction
+	 */
 
+	private void checkForCollision() {
+		double x = ball.getX();
+		double y = ball.getY();
+		double b = 2 * BALL_RADIUS;
+		if (y < 0) {
+			vY = -vY;
+			ball.move(0, -2 * y);
+		}
+		if (x > WIDTH - b) {
+			vX = -vX;
+			ball.move(-2 * x, 0);
+		}
+	}
+	
 	/**
 	 * Message for game
 	 * 
