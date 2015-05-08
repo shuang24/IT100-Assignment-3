@@ -165,7 +165,7 @@ public class Breakout extends GraphicsProgram {
 		scoreLabel = new GLabel("Score: " + score + " " );
 		scoreLabel.setFont("Verdana-30");
 		double X = getWidth() - scoreLabel.getWidth();
-		double Y = 
+		double Y = getWidth() - 
 	}
 
 	/**
