@@ -92,10 +92,7 @@ public class Breakout extends GraphicsProgram {
 
 		for (int i = 0; i < NTURNS; i++) {
 			displayMessage("Click to start");
-			GameStart = false;
-			while (!GameStart) {
-				pause(DELAY * 5);
-
+			waitForClick();
 			removeGameMessage();
 			setTheBall();
 			while ((ball.getY() < HEIGHT) && (numOfBricks > 0)) {
@@ -108,7 +105,7 @@ public class Breakout extends GraphicsProgram {
 		}
 		displayMessage("Game Over");
 	}
-	}	
+	
 	/**
 	 * Set the Bricks
 	 */
