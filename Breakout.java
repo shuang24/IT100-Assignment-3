@@ -220,6 +220,10 @@ public class Breakout extends GraphicsProgram {
 		}
 		if (x > WIDTH - b) {
 			vX = -vX;
+			ball.move(-2 * (x - WIDTH + b), 0);
+		}
+		if(x < 0) {
+			vX = -vX;
 			ball.move(-2 * x, 0);
 		}
 	}
