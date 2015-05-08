@@ -73,7 +73,7 @@ public class Breakout extends GraphicsProgram {
 	// private int numOfHits;
 	private GLabel scoreLabel;
 	// private int score;
-	private boolean startGame;
+	private boolean GameStart;
 	
 	/* Method: init() */
 	
@@ -88,8 +88,8 @@ public class Breakout extends GraphicsProgram {
 
 		for (int i = 0; i < NTURNS; i++) {
 			displayMessage("Click to start");
-			startGame = false;
-			while (!startGame) {
+			GameStart = false;
+			while (!GameStart) {
 				pause(DELAY * 5);
 			}
 			// removeGameMessage();
