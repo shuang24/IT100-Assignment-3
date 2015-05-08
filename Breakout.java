@@ -78,7 +78,7 @@ public class Breakout extends GraphicsProgram {
 	/* Method: init() */
 	
 	public void init() {
-		
+		setTheBricks();
 	}
 
 	/* Method: run() */
