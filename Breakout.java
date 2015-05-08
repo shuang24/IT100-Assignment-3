@@ -118,7 +118,6 @@ public class Breakout extends GraphicsProgram {
 		}
 		numOfBricks = NBRICK_ROWS * NBRICKS_PER_ROW;
 	}
-	}
 	
 	/**
 	 * Set The Ball
