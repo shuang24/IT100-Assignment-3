@@ -72,7 +72,7 @@ public class Breakout extends GraphicsProgram {
 	private GLabel label;
 	// private int numOfHits;
 	private GLabel scoreLabel;
-	// private int score;
+	private int score;
 	private boolean GameStart;
 	
 	/* Method: init() */
@@ -143,6 +143,7 @@ public class Breakout extends GraphicsProgram {
 		add(paddle);
 		addMouseListeners();
 	}
+	
 	/**
 	 * Set The Ball
 	 */
@@ -152,6 +153,18 @@ public class Breakout extends GraphicsProgram {
 		ball = new GOval(b, b);
 		ball.setLocation(WIDTH / 2 - BALL_RADIUS, HEIGHT / 2 - BALL_RADIUS);
 		add(ball);
+	}
+	
+	/**
+	 * set the score
+	 */
+	
+	private void setScore() {
+		score = 0;
+		scoreLabel = new GLabel("Score: " + score + " " );
+		scoreLabel.setFont("Verdana-30");
+		double X = getWidth() - scoreLabel.getWidth();
+		double Y = 
 	}
 
 	/**
