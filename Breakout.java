@@ -63,7 +63,10 @@ public class Breakout extends GraphicsProgram {
 	
 	/** Number of times the paddle has to hit beore doubling speed */
 	private static final int SUCCESSFULL_PADDLEHITS_BEFORE_KICKER = 7;
-
+	
+	/** Start value for vY */
+	private static final double VY_START = 5.0;
+	
 	/**
 	 * Instance variables
 	 */
