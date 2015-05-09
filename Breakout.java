@@ -6,6 +6,7 @@
  * 
  * This file will eventually implement the game of Breakout.
  */
+
 import acm.graphics.*;
 import acm.program.*;
 import acm.util.*;
@@ -41,8 +42,9 @@ public class Breakout extends GraphicsProgram {
 	private static final int BRICK_SEP = 4;
 
 	/** Width of a brick */
-	private static final int BRICK_WIDTH =
-		(WIDTH - (NBRICKS_PER_ROW - 1) * BRICK_SEP) / NBRICKS_PER_ROW;
+	private static final int BRICK_WIDTH = (WIDTH - (NBRICKS_PER_ROW - 1)
+			* BRICK_SEP)
+			/ NBRICKS_PER_ROW;
 
 	/** Height of a brick */
 	private static final int BRICK_HEIGHT = 8;
@@ -56,128 +58,148 @@ public class Breakout extends GraphicsProgram {
 	/** Number of turns */
 	private static final int NTURNS = 3;
 
-	/** Start value for vy */
-	private static final double VY_START = 5.0;
-	
-	/** Animation delay or pause time between ball moves */ 
+	/** Animation delay or pause time between ball moves */
 	private static final int DELAY = 15;
-
-	/** Number of times the paddle has to be hit before doubling speed */ 
+	
+	/** Number of times the paddle has to hit before doubling speed */
 	private static final int SUCCESSFULL_PADDLEHITS_BEFORE_KICKER = 7;
 	
+	/** Start value for vY */
+	private static final double VY_START = 5.0;
+	
 	/**
-	 * instance variables
+	 * Instance variables
 	 */
 	private GRect paddle;
 	private GOval ball;
-	private double vx, vy;
+	private double vX, vY;
 	private RandomGenerator rgen = RandomGenerator.getInstance();
-	private int numberOfBricks;
-	AudioClip bounceClip = MediaTools.loadAudioClip("bounce.au");
+	private int numOfBricks;
 	private GLabel label;
-	private boolean startGame;
-	private int numberOfPaddleHits;
+	private int numOfHits;
 	private GLabel scoreLabel;
 	private int score;
-
-
+	private boolean GameStart;
+	
 	/* Method: init() */
-	/** Sets up the Breakout program. */
+	/** Initialize the game*/
+	
 	public void init() {
-		setupBricks();
-		setupPaddle();
-		setupScore();
+		setTheBricks();
+		setThePaddle();
+		setScore();
 	}
 
 	/* Method: run() */
 	/** Runs the Breakout program. */
 	public void run() {
+		/* You fill this in, along with any subsidiary methods */
+
 		for (int i = 0; i < NTURNS; i++) {
-			displayMessage("press mouse button");
-			startGame = false;
-			while (!startGame) {
+			displayMessage("Click to start");
+			GameStart = false;
+			while (!GameStart) {
 				pause(DELAY * 10);
 			}
-			removeMessage();
-			setupBall();
-			while ((ball.getY() < HEIGHT) && (numberOfBricks > 0)) {
-				moveBall();
+			removeGameMessage();
+			setTheBall();
+			while ((ball.getY() < HEIGHT) && (numOfBricks > 0)) {
+				moveTheBall();
 				checkForCollision();
 				pause(DELAY);
-			} 			
-			if (numberOfBricks == 0) {
-				displayMessage("Winner!");
-				return;					
+			}
+			if (numOfBricks == 0) {
+				displayMessage("You Win!");
+				return;
 			}
 		}
 		displayMessage("Game Over");
 	}
-
+	
 	/**
-	 * setup bricks
+	 * Set the Bricks
 	 */
-	private void setupBricks() {
-		int y = BRICK_Y_OFFSET;
+	private void setTheBricks() {
+		int Y = BRICK_Y_OFFSET;
 		int firstX = (WIDTH - BRICK_WIDTH * NBRICKS_PER_ROW - BRICK_SEP * (NBRICKS_PER_ROW - 1)) / 2;
 		Color[] colors = {Color.RED, Color.ORANGE, Color.YELLOW, Color.GREEN, Color.CYAN};
 
-		for (int j = 0; j < NBRICK_ROWS; j ++) {
-			int x = firstX;
-			Color c = colors[j / 2];
+		for (int k = 0; k < NBRICK_ROWS; k ++) {
+			int X = firstX;
+			Color c = colors[k / 2];
 			for (int i = 0; i < NBRICKS_PER_ROW; i++) {
 				GRect brick = new GRect(BRICK_WIDTH, BRICK_HEIGHT);
-				brick.setLocation(x, y);
+				brick.setLocation(X, Y);
 				brick.setFilled(true);
 				brick.setColor(c);
 				add(brick);
-				x += BRICK_WIDTH + BRICK_SEP;
+				X += BRICK_WIDTH + BRICK_SEP;
 			}
-			y += BRICK_HEIGHT + BRICK_SEP;
+			Y += BRICK_HEIGHT + BRICK_SEP;
 		}
-		numberOfBricks = NBRICK_ROWS * NBRICKS_PER_ROW;
+		numOfBricks = NBRICK_ROWS * NBRICKS_PER_ROW;
 	}
-
+	
 	/**
-	 * setup paddle
+	 * Set The Paddle
 	 */
-	private void setupPaddle() {
+	
+	private void setThePaddle(){
 		paddle = new GRect(PADDLE_WIDTH, PADDLE_HEIGHT);
-		paddle.setLocation(
-				(WIDTH - PADDLE_WIDTH) / 2, 
-				HEIGHT - PADDLE_Y_OFFSET - PADDLE_HEIGHT
-		);
+		paddle.setLocation(WIDTH - PADDLE_WIDTH /2 , HEIGHT - PADDLE_Y_OFFSET - PADDLE_HEIGHT);
 		paddle.setFilled(true);
 		add(paddle);
 		addMouseListeners();
 	}
-
+	
 	/**
-	 * setup score label
+	 * Set The Ball
 	 */
-	private void setupScore() {
+
+	private void setTheBall() {
+		double b = 2 * BALL_RADIUS;
+		ball = new GOval(b, b);
+		ball.setLocation(WIDTH / 2 - BALL_RADIUS, HEIGHT / 2 - BALL_RADIUS);
+		add(ball);
+		
+		vY = VY_START;
+		vX = rgen.nextDouble(1.0, 3.0);
+		if (rgen.nextBoolean(0.5)) vX = -vX;
+		
+		numOfHits = 0;
+	}
+	
+	/**
+	 * set the score
+	 */
+	
+	private void setScore() {
 		score = 0;
-		scoreLabel = new GLabel("Score: " + score + " ");
-		scoreLabel.setFont("SansSerif-28");
-		double x = getWidth() - scoreLabel.getWidth();
-		double y = getHeight() - scoreLabel.getAscent();
-		scoreLabel.setLocation(x, y);
+		scoreLabel = new GLabel("Score: " + score + " " );
+		scoreLabel.setFont("Verdana-30");
+		double X = getWidth() - scoreLabel.getWidth();
+		double Y = getWidth() - scoreLabel.getWidth();
+		scoreLabel.setLocation(X,Y);
 		add(scoreLabel);
 	}
 	
 	/**
-	 * add score value and adjust the label
+	 * Set the value
+	 * @param value
 	 */
+	
 	private void addScore(int value) {
 		score += value;
 		scoreLabel.setLabel("Score: " + score + " ");
 		double x = getWidth() - scoreLabel.getWidth();
-		double y = scoreLabel.getY();
+		double y = getHeight() - scoreLabel.getHeight();
 		scoreLabel.setLocation(x, y);
 	}
-	
+
 	/**
-	 * bind paddle to mouse movement
+	 * Mouse Function
 	 */
+	
 	public void mouseMoved(MouseEvent e) {
 		double x = e.getX();
 		double minX = PADDLE_WIDTH / 2;
@@ -191,129 +213,113 @@ public class Breakout extends GraphicsProgram {
 				x - minX, 
 				HEIGHT - PADDLE_Y_OFFSET - PADDLE_HEIGHT
 		);
-	}
-
-	/**
-	 * start game when mouse button has been clicked
-	 */
-	public void mouseClicked(MouseEvent e) {
-		startGame = true;
-	}
-
-	/**
-	 * setup ball
-	 */
-	private void setupBall() {
-		double d = 2 * BALL_RADIUS;
-		ball = new GOval(d, d);
-		ball.setFilled(true);
-		ball.setLocation(WIDTH / 2 - BALL_RADIUS, HEIGHT / 2 - BALL_RADIUS);
-		add(ball);
 		
-		vy = VY_START;
-		vx = rgen.nextDouble(1.0, 3.0);
-		if (rgen.nextBoolean(0.5)) vx = -vx;
-		
-		numberOfPaddleHits = 0;
-	}
-
-	/**
-	 * move ball
-	 */
-	private void moveBall() {
-		ball.move(vx, vy);
 	}
 	
 	/**
-	 * check for collision and change direction
+	 * Start The Game!
 	 */
+
+	public void mouseClicked(MouseEvent e) {
+		GameStart = true;
+	}
+
+	/**
+	 * Move The Ball
+	 */
+
+	private void moveTheBall() {
+		ball.move(vX, vY);
+	}
+	
+	/**
+	 * Collision and direction
+	 */
+
 	private void checkForCollision() {
 		double x = ball.getX();
 		double y = ball.getY();
-		double d = 2 * BALL_RADIUS;
+		double b = 2 * BALL_RADIUS;
 		if (y < 0) {
-			vy = -vy;
+			vY = -vY;
 			ball.move(0, -2 * y);
-			bounceClip.play();
 		}
-		if (x > WIDTH - d) {
-			vx = -vx;
-			ball.move(-2 * (x - WIDTH + d), 0);
-			bounceClip.play();
+		if (x > WIDTH - b) {
+			vX = -vX;
+			ball.move(-2 * (x - WIDTH + b), 0);
 		}
-		if (x < 0) {
-			vx = -vx;
+		if(x < 0) {
+			vX = -vX;
 			ball.move(-2 * x, 0);
-			bounceClip.play();
 		}
 		
+		
 		GObject collider = getCollidingObject();
-		if (collider == paddle) {			
-			double hitPosition = (2 * (x - paddle.getX()) + d - PADDLE_WIDTH) / (d + PADDLE_WIDTH);
+		if (collider == paddle) {
+			double hitPosition = (2 * (x - paddle.getX()) + b - PADDLE_WIDTH) / (b + PADDLE_WIDTH);
 			if (hitPosition < 0) {
-				vx = -Math.abs(vx);
-			} else {
-				vx = Math.abs(vx);
+				vX = -Math.abs(vX);
+			}else {
+				vX = Math.abs(vX);
 			}
-			numberOfPaddleHits++;
-			if (numberOfPaddleHits % SUCCESSFULL_PADDLEHITS_BEFORE_KICKER == 0) {
-				vx *= 2;
+			numOfHits++;
+			if (numOfHits % SUCCESSFULL_PADDLEHITS_BEFORE_KICKER == 0) {
+				vX *= 2;
 			}
-			vy = -vy;
-			ball.move(0, -2 * (y + d - HEIGHT + PADDLE_Y_OFFSET + PADDLE_HEIGHT));
-			bounceClip.play();
-		} else if (collider instanceof GRect) {
+			vY = -vY;
+			ball.move(0, -2 * (y + b - HEIGHT + PADDLE_Y_OFFSET + PADDLE_HEIGHT));
+		}else if (collider instanceof GRect) {
 			if (collider.getColor() == Color.CYAN) addScore(10);
 			else if (collider.getColor() == Color.GREEN) addScore(20);
 			else if (collider.getColor() == Color.YELLOW) addScore(30);
 			else if (collider.getColor() == Color.ORANGE) addScore(40);
 			else if (collider.getColor() == Color.RED) addScore(50);
 			remove(collider);
-			numberOfBricks--;
-			vy = -vy;
-			bounceClip.play();
+			numOfBricks--;
+			vY = -vY;
 		}
 	}
-
 	/**
-	 * search for colliding object
-	 * @return colliding object || null
+	 * search for colliding object 
+	 * @return colliding object 
 	 */
 	private GObject getCollidingObject() {
 		double x = ball.getX();
 		double y = ball.getY();
-		double d = 2 * BALL_RADIUS;
+		double b = 2 * BALL_RADIUS;
 		GObject object;
-
+		
 		object = getElementAt(x, y);
 		if (object != null) return object;
-		object = getElementAt(x + d, y);
+		object = getElementAt(x + b, y);
 		if (object != null) return object;
-		object = getElementAt(x, y + d);
+		object = getElementAt(x, y + b);
 		if (object != null) return object;
-		object = getElementAt(x + d, y + d);
+		object = getElementAt(x + b, y + b);
 		if (object != null) return object;
 		return null;
 	}
 	
 	/**
-	 * print game messages
+	 * Message for game
+	 * 
 	 * @param message
 	 */
+
 	private void displayMessage(String message) {
 		label = new GLabel(message);
-		label.setFont("SansSerif-28");
-		double x = (getWidth() - label.getWidth()) / 2;
-		double y = (getHeight() + label.getAscent()) / 2;
-		label.setLocation(x, y);
+		label.setFont("Verdana-30");
+		double X = (getWidth() - label.getWidth()) / 2;
+		double Y = (getHeight() - label.getHeight()) / 2;
+		label.setLocation(X, Y);
 		add(label);
 	}
 
 	/**
-	 * remove game messages
+	 * delete message
 	 */
-	private void removeMessage() {
-		remove(label);
-	}
 
+	 private void removeGameMessage() {
+	 remove(label);
+	 }
 }
