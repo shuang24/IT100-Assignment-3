@@ -99,7 +99,7 @@ public class Breakout extends GraphicsProgram {
 			displayMessage("Click to start");
 			GameStart = false;
 			while (!GameStart) {
-				pause(DELAY * 5);
+				pause(DELAY * 10);
 			}
 			removeGameMessage();
 			setTheBall();
