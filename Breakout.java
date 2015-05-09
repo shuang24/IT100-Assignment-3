@@ -247,10 +247,15 @@ public class Breakout extends GraphicsProgram {
 			}else {
 				vX = Math.abs(vX);
 			}
-			numberOfPaddleHits++;
-			if (numberOfPaddleHits % SUCCESSFULL_PADDLEHITS_BEFORE_KICKER == 0) {
-				
+			numOfHits++;
+			if (numOfHits % SUCCESSFULL_PADDLEHITS_BEFORE_KICKER == 0) {
+				vX *= 2;
 			}
+			vY = -vY;
+			ball.move(0, -2 * (y + b - HEIGHT + PADDLE_Y_OFFSET + PADDLE_HEIGHT));
+		}else if (collider instanceof GRect) {
+			if (collider.getColor() == Color.CYAN) addScore(10);
+			else if (.GRE)
 		}
 	}
 	
