@@ -186,7 +186,7 @@ public class Breakout extends GraphicsProgram {
 	 * Mouse Function
 	 */
 	
-	private void mouseFunction(MouseEvent e) {
+	public void mouseMoved(MouseEvent e) {
 		double x = e.getX();
 		double minX = PADDLE_WIDTH / 2;
 		double maxX = WIDTH - PADDLE_WIDTH / 2;
