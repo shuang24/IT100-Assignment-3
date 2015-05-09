@@ -182,6 +182,11 @@ public class Breakout extends GraphicsProgram {
 		add(scoreLabel);
 	}
 	
+	/**
+	 * Set the value
+	 * @param value
+	 */
+	
 	private void addScore(int value) {
 		score += value;
 		scoreLabel.setLabel("Score: " + score + " ");
@@ -247,6 +252,7 @@ public class Breakout extends GraphicsProgram {
 			ball.move(-2 * x, 0);
 		}
 		
+		
 		GObject collider = getCollidingObject();
 		if (collider == paddle) {
 			double hitPosition = (2 * (x - paddle.getX()) + b - PADDLE_WIDTH) / (b + PADDLE_WIDTH);
@@ -271,6 +277,23 @@ public class Breakout extends GraphicsProgram {
 			numOfBricks--;
 			vY = -vY;
 		}
+	}
+	
+	private GObject getCollidingObject() {
+		double x = ball.getX();
+		double y = ball.getY();
+		double b = 2 * BALL_RADIUS;
+		GObject object;
+		
+		object = getElementAt(x, y);
+		if (object != null) return object;
+		object = getElementAt(x + b, y);
+		if (object != null) return object;
+		object = getElementAt(x, y + b);
+		if (object != null) return object;
+		object = getElementAt(x + b, y + b);
+		if (object != null) return object;
+		return null;
 	}
 	
 	/**
