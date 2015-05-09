@@ -181,6 +181,14 @@ public class Breakout extends GraphicsProgram {
 		scoreLabel.setLocation(X,Y);
 		add(scoreLabel);
 	}
+	
+	private void addScore(int value) {
+		score += value;
+		scoreLabel.setLabel("Score: " + score + " ");
+		double x = getWidth() - scoreLabel.getWidth();
+		double y = getHeight() - scoreLabel.getHeight();
+		scoreLabel.setLocation(x, y);
+	}
 
 	/**
 	 * Mouse Function
@@ -255,7 +263,13 @@ public class Breakout extends GraphicsProgram {
 			ball.move(0, -2 * (y + b - HEIGHT + PADDLE_Y_OFFSET + PADDLE_HEIGHT));
 		}else if (collider instanceof GRect) {
 			if (collider.getColor() == Color.CYAN) addScore(10);
-			else if (.GRE)
+			else if (collider.getColor() == Color.GREEN) addScore(20);
+			else if (collider.getColor() == Color.YELLOW) addScore(30);
+			else if (collider.getColor() == Color.ORANGE) addScore(40);
+			else if (collider.getColor() == Color.RED) addScore(50);
+			remove(collider);
+			numOfBricks--;
+			vY = -vY;
 		}
 	}
 	
