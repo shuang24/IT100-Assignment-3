@@ -80,6 +80,7 @@ public class Breakout extends GraphicsProgram {
 	private GLabel scoreLabel;
 	private int score;
 	private boolean GameStart;
+	AudioClip bounceClip = MediaTools.loadAudioClip("bounce.au"); 
 	
 	/* Method: init() */
 	/** Initialize the game*/
