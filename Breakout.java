@@ -278,7 +278,10 @@ public class Breakout extends GraphicsProgram {
 			vY = -vY;
 		}
 	}
-	
+	/**
+	 * search for colliding object 
+	 * @return colliding object 
+	 */
 	private GObject getCollidingObject() {
 		double x = ball.getX();
 		double y = ball.getY();
