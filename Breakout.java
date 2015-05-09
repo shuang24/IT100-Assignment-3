@@ -60,13 +60,13 @@ public class Breakout extends GraphicsProgram {
 
 	/** Animation delay or pause time between ball moves */
 	private static final int DELAY = 15;
-	
+
 	/** Number of times the paddle has to hit before doubling speed */
 	private static final int SUCCESSFULL_PADDLEHITS_BEFORE_KICKER = 7;
-	
+
 	/** Start value for vY */
 	private static final double VY_START = 5.0;
-	
+
 	/**
 	 * Instance variables
 	 */
@@ -80,11 +80,11 @@ public class Breakout extends GraphicsProgram {
 	private GLabel scoreLabel;
 	private int score;
 	private boolean GameStart;
-	AudioClip bounceClip = MediaTools.loadAudioClip("bounce.au"); 
-	
+	AudioClip bounceClip = MediaTools.loadAudioClip("bounce.au");
+
 	/* Method: init() */
-	/** Initialize the game*/
-	
+	/** Initialize the game */
+
 	public void init() {
 		setTheBricks();
 		setThePaddle();
@@ -116,16 +116,18 @@ public class Breakout extends GraphicsProgram {
 		}
 		displayMessage("Game Over");
 	}
-	
+
 	/**
 	 * Set the Bricks
 	 */
 	private void setTheBricks() {
 		int Y = BRICK_Y_OFFSET;
-		int firstX = (WIDTH - BRICK_WIDTH * NBRICKS_PER_ROW - BRICK_SEP * (NBRICKS_PER_ROW - 1)) / 2;
-		Color[] colors = {Color.RED, Color.ORANGE, Color.YELLOW, Color.GREEN, Color.CYAN};
+		int firstX = (WIDTH - BRICK_WIDTH * NBRICKS_PER_ROW - BRICK_SEP
+				* (NBRICKS_PER_ROW - 1)) / 2;
+		Color[] colors = { Color.RED, Color.ORANGE, Color.YELLOW, Color.GREEN,
+				Color.CYAN };
 
-		for (int k = 0; k < NBRICK_ROWS; k ++) {
+		for (int k = 0; k < NBRICK_ROWS; k++) {
 			int X = firstX;
 			Color c = colors[k / 2];
 			for (int i = 0; i < NBRICKS_PER_ROW; i++) {
@@ -140,19 +142,20 @@ public class Breakout extends GraphicsProgram {
 		}
 		numOfBricks = NBRICK_ROWS * NBRICKS_PER_ROW;
 	}
-	
+
 	/**
 	 * Set The Paddle
 	 */
-	
-	private void setThePaddle(){
+
+	private void setThePaddle() {
 		paddle = new GRect(PADDLE_WIDTH, PADDLE_HEIGHT);
-		paddle.setLocation(WIDTH - PADDLE_WIDTH /2 , HEIGHT - PADDLE_Y_OFFSET - PADDLE_HEIGHT);
+		paddle.setLocation(WIDTH - PADDLE_WIDTH / 2, HEIGHT - PADDLE_Y_OFFSET
+				- PADDLE_HEIGHT);
 		paddle.setFilled(true);
 		add(paddle);
 		addMouseListeners();
 	}
-	
+
 	/**
 	 * Set The Ball
 	 */
@@ -162,33 +165,35 @@ public class Breakout extends GraphicsProgram {
 		ball = new GOval(b, b);
 		ball.setLocation(WIDTH / 2 - BALL_RADIUS, HEIGHT / 2 - BALL_RADIUS);
 		add(ball);
-		
+
 		vY = VY_START;
 		vX = rgen.nextDouble(1.0, 3.0);
-		if (rgen.nextBoolean(0.5)) vX = -vX;
-		
+		if (rgen.nextBoolean(0.5))
+			vX = -vX;
+
 		numOfHits = 0;
 	}
-	
+
 	/**
 	 * set the score
 	 */
-	
+
 	private void setScore() {
 		score = 0;
-		scoreLabel = new GLabel("Score: " + score + " " );
+		scoreLabel = new GLabel("Score: " + score + " ");
 		scoreLabel.setFont("Verdana-30");
 		double X = getWidth() - scoreLabel.getWidth();
 		double Y = getWidth() - scoreLabel.getWidth();
-		scoreLabel.setLocation(X,Y);
+		scoreLabel.setLocation(X, Y);
 		add(scoreLabel);
 	}
-	
+
 	/**
 	 * Set the value
+	 * 
 	 * @param value
 	 */
-	
+
 	private void addScore(int value) {
 		score += value;
 		scoreLabel.setLabel("Score: " + score + " ");
@@ -200,7 +205,7 @@ public class Breakout extends GraphicsProgram {
 	/**
 	 * Mouse Function
 	 */
-	
+
 	public void mouseMoved(MouseEvent e) {
 		double x = e.getX();
 		double minX = PADDLE_WIDTH / 2;
@@ -211,9 +216,8 @@ public class Breakout extends GraphicsProgram {
 			x = maxX;
 		}
 		paddle.setLocation(x - minX, HEIGHT - PADDLE_Y_OFFSET - PADDLE_HEIGHT);
-		
 	}
-	
+
 	/**
 	 * Start The Game!
 	 */
@@ -229,7 +233,7 @@ public class Breakout extends GraphicsProgram {
 	private void moveTheBall() {
 		ball.move(vX, vY);
 	}
-	
+
 	/**
 	 * Collision and direction
 	 */
@@ -241,23 +245,26 @@ public class Breakout extends GraphicsProgram {
 		if (y < 0) {
 			vY = -vY;
 			ball.move(0, -2 * y);
+			bounceClip.play();
 		}
 		if (x > WIDTH - b) {
 			vX = -vX;
 			ball.move(-2 * (x - WIDTH + b), 0);
+			bounceClip.play();
 		}
-		if(x < 0) {
+		if (x < 0) {
 			vX = -vX;
 			ball.move(-2 * x, 0);
+			bounceClip.play();
 		}
-		
-		
+
 		GObject collider = getCollidingObject();
 		if (collider == paddle) {
-			double hitPosition = (2 * (x - paddle.getX()) + b - PADDLE_WIDTH) / (b + PADDLE_WIDTH);
+			double hitPosition = (2 * (x - paddle.getX()) + b - PADDLE_WIDTH)
+					/ (b + PADDLE_WIDTH);
 			if (hitPosition < 0) {
 				vX = -Math.abs(vX);
-			}else {
+			} else {
 				vX = Math.abs(vX);
 			}
 			numOfHits++;
@@ -265,39 +272,53 @@ public class Breakout extends GraphicsProgram {
 				vX *= 2;
 			}
 			vY = -vY;
-			ball.move(0, -2 * (y + b - HEIGHT + PADDLE_Y_OFFSET + PADDLE_HEIGHT));
-		}else if (collider instanceof GRect) {
-			if (collider.getColor() == Color.CYAN) addScore(10);
-			else if (collider.getColor() == Color.GREEN) addScore(20);
-			else if (collider.getColor() == Color.YELLOW) addScore(30);
-			else if (collider.getColor() == Color.ORANGE) addScore(40);
-			else if (collider.getColor() == Color.RED) addScore(50);
+			ball.move(0, -2
+					* (y + b - HEIGHT + PADDLE_Y_OFFSET + PADDLE_HEIGHT));
+			bounceClip.play();
+		} else if (collider instanceof GRect) {
+			if (collider.getColor() == Color.CYAN)
+				addScore(10);
+			else if (collider.getColor() == Color.GREEN)
+				addScore(20);
+			else if (collider.getColor() == Color.YELLOW)
+				addScore(30);
+			else if (collider.getColor() == Color.ORANGE)
+				addScore(40);
+			else if (collider.getColor() == Color.RED)
+				addScore(50);
 			remove(collider);
 			numOfBricks--;
 			vY = -vY;
+			bounceClip.play();
 		}
 	}
+
 	/**
-	 * search for colliding object 
-	 * @return colliding object 
+	 * search for colliding object
+	 * 
+	 * @return colliding object
 	 */
 	private GObject getCollidingObject() {
 		double x = ball.getX();
 		double y = ball.getY();
 		double b = 2 * BALL_RADIUS;
 		GObject object;
-		
+
 		object = getElementAt(x, y);
-		if (object != null) return object;
+		if (object != null)
+			return object;
 		object = getElementAt(x + b, y);
-		if (object != null) return object;
+		if (object != null)
+			return object;
 		object = getElementAt(x, y + b);
-		if (object != null) return object;
+		if (object != null)
+			return object;
 		object = getElementAt(x + b, y + b);
-		if (object != null) return object;
+		if (object != null)
+			return object;
 		return null;
 	}
-	
+
 	/**
 	 * Message for game
 	 * 
@@ -317,7 +338,7 @@ public class Breakout extends GraphicsProgram {
 	 * delete message
 	 */
 
-	 private void removeGameMessage() {
-	 remove(label);
-	 }
+	private void removeGameMessage() {
+		remove(label);
+	}
 }
