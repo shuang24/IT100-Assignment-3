@@ -193,7 +193,7 @@ public class Breakout extends GraphicsProgram {
 		score += value;
 		scoreLabel.setLabel("Score: " + score + " ");
 		double x = getWidth() - scoreLabel.getWidth();
-		double y = getHeight() - scoreLabel.getHeight();
+		double y = scoreLabel.getY();
 		scoreLabel.setLocation(x, y);
 	}
 
@@ -210,10 +210,7 @@ public class Breakout extends GraphicsProgram {
 		} else if (x > maxX) {
 			x = maxX;
 		}
-		paddle.setLocation(
-				x - minX, 
-				HEIGHT - PADDLE_Y_OFFSET - PADDLE_HEIGHT
-		);
+		paddle.setLocation(x - minX, HEIGHT - PADDLE_Y_OFFSET - PADDLE_HEIGHT);
 		
 	}
 	
