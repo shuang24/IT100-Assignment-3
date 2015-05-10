@@ -86,7 +86,7 @@ public class Breakout extends GraphicsProgram {
 	/** Initialize the game */
 
 	public void init() {
-		//setTheBricks();
+		setTheBricks();
 		setThePaddle();
 		setScore();
 	}
