@@ -115,7 +115,7 @@ public class Breakout extends GraphicsProgram {
 			}
 		}
 		displayMessage("Game Over");
-		playAgain();
+//		playAgain();
 	}
 
 	/**
@@ -344,10 +344,10 @@ public class Breakout extends GraphicsProgram {
 		remove(label);
 	}
 	
-	private void playAgain(){
-		waitForClick();
-		removeGameMessage();
-		setTheBricks();
-		run();
-	}
+//	private void playAgain(){
+//		waitForClick();
+//		removeGameMessage();
+//		setTheBricks();
+//		run();
+//	}
 }
