@@ -114,7 +114,7 @@ public class Breakout extends GraphicsProgram {
 				return;
 			}
 		}
-		displayMessage("Game Over," + "/n Click to Start Over");
+		displayMessage("Game Over");
 		waitForClick();
 		removeGameMessage();
 		run();
