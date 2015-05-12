@@ -287,7 +287,7 @@ public class Breakout extends GraphicsProgram {
 			else if (collider.getColor() == Color.ORANGE)
 				addScore(40);
 			else if (collider.getColor() == Color.RED)
-				addScore(10000000);
+				addScore(50);
 			remove(collider);
 			numOfBricks--;
 			vY = -vY;
